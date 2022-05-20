@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha3
+84-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+ <link rel="stylesheet" type="text/css" href="static/style.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Chonburi&display=swap" rel="stylesheet">
+ </head>
+ <!-- END OF HEAD -->
+ <body>
+ <div>
+ <div id="tomper">
+ <img src = "chatbot.jpg" height=65px>
+ <h1>IGDTUW SMARTBOT</h1>
+ <img src = "chatbot.jpg" height=65px>
+  </div>
+  <div>
+  <div id="chatbox">
+  <p class="botText"><span>Hi! I'm Smartbot.</span></p>
+  </div>
+  <div id="userInput">
+  <input id="textInput" type="text" name="msg" placeholder="Message">
+  <input id="buttonInput" type="submit" value="Send">
+  </div>
+  <script>
+  function getBotResponse() { 
+  var rawText = $("#textInput").val(); 
+  var userHtml = '<p class="userText"><span>' + rawText + '</span></p>'; 
+  $("#textInput").val(""); 
+  $("#chatbox").append(userHtml); 
+  document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'}); 
+  $.get("/get", { msg: rawText }).done(function(data) { 
+  var botHtml = '<p class="botText"><span>' + data + '</span></p>'; 
+  $("#chatbox").append(botHtml); 
+  document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'}); 
+  }); 
+  } 
+  $("#textInput").keypress(function(e) { 
+  if ((e.which == 13) && document.getElementById("textInput").value != "" ){ 
+  getBotResponse(); 
+  } 
+}); 
+ $("#buttonInput").click(function() { 
+ if (document.getElementById("textInput").value != "") { 
+ getBotResponse(); 
+ } 
+ }) 
+ </script>
+ </div>
+ </div>
+ <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-
+q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-
+UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+ <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-
+JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+ </body>
+</html>
+ 
